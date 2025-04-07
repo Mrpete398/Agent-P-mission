@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Briefing</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 20px;
+    }
+    video {
+      margin-top: 20px;
+      width: 90%;
+      max-width: 720px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome Agent P</h1>
+  <p>Down here is a video. Follow the instructions as it is.<br>The site will self-destruct 3 seconds after the video ends.</p>
+
+  <video id="agentVideo" controls>
+    <source src="video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <script>
+    const video = document.getElementById('agentVideo');
+    video.addEventListener('ended', () => {
+      setTimeout(() => {
+        document.body.style.backgroundColor = 'black';
+        document.body.innerHTML = \"<h1 style='color:red;'>ERROR: Site doesn't exist anymore</h1>\";
+      }, 3000); // 3 seconds after video ends
+    });
+  </script>
+</body>
+</html>
