@@ -3,14 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome Agent P - Home</title>
+  <title>Agent P Video</title>
   <style>
     body {
       margin: 0;
       background: black;
-      color: #00ff00; /* Green color for page text */
+      color: #00ff00; /* Green text */
       font-family: monospace;
       text-align: center;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     h1 {
@@ -18,73 +23,117 @@
       font-size: 2em;
     }
 
-    p {
-      font-size: 1em;
-    }
-
-    video {
-      margin-top: 30px;
-      width: 90%;
-      max-width: 600px;
-      border: 2px solid #00ff00; /* Green border */
-      border-radius: 10px;
-    }
-
-    #countdown {
-      display: none;
+    #videoCountdown {
       font-size: 1.5em;
-      color: red;
       margin-top: 20px;
     }
 
-    /* Matrix canvas style */
+    #videoContainer {
+      margin-top: 50px;
+      width: 80%;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Progress bar styling */
+    #progress-bar-container {
+      margin-top: 20px;
+      width: 80%;
+      max-width: 700px;
+      background-color: #333;
+      border-radius: 5px;
+      height: 20px;
+      display: none; /* Hidden initially */
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0;
+      background-color: #00ff00;
+      border-radius: 5px;
+    }
+
+    /* Matrix effect canvas */
     #matrixCanvas {
       position: fixed;
       bottom: 0;
       left: 0;
       width: 100%;
       height: 150px; /* Matrix height at the bottom */
-      z-index: -1; /* Make sure it's behind the page content */
-      pointer-events: none; /* Make it non-interactive */
+      z-index: -1; /* Behind the page content */
+      pointer-events: none; /* Non-interactive */
     }
   </style>
 </head>
 <body>
 
-  <h1>Welcome Agent P</h1>
-  <p>Down here is a video. Follow the instructions as it is.</p>
-  <p>The site will autodestroy when you'll end the video in 3 seconds.</p>
+  <h1>Welcome Agent P 008</h1>
+  <div id="videoCountdown">Down here is a video, follow the instructions as it is, this site will autodestroy when you'll end the video in 3 seconds.</div>
 
-  <video id="agentVideo" autoplay playsinline>
-    <source src="video.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
-  </video>
+  <!-- Countdown text before video starts -->
+  <div id="videoCountdown">Video starts playing in 10 seconds...</div>
 
-  <div id="countdown">Self-destruct in 3...</div>
+  <!-- Video container -->
+  <div id="videoContainer">
+    <video id="videoPlayer" width="100%" controls style="display:none;">
+      <source src="video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 
-  <!-- Matrix canvas -->
+  <!-- Progress bar after video ends -->
+  <div id="progress-bar-container">
+    <div id="progress-bar"></div>
+  </div>
+
+  <!-- Matrix effect canvas -->
   <canvas id="matrixCanvas"></canvas>
 
   <script>
-    // Video autoplay and audio handling
-    const video = document.getElementById("agentVideo");
-    const countdown = document.getElementById("countdown");
+    // Countdown before the video starts
+    let countdown = 10;
+    const countdownText = document.getElementById("videoCountdown");
+    const videoPlayer = document.getElementById("videoPlayer");
+    const progressBar = document.getElementById("progress-bar");
+    const progressBarContainer = document.getElementById("progress-bar-container");
 
-    // When video ends, show countdown
-    video.addEventListener("ended", () => {
-      let seconds = 3;
-      countdown.style.display = "block";
-      countdown.textContent = `Self-destruct in ${seconds}...`;
+    const countdownInterval = setInterval(function() {
+      countdown--;
+      countdownText.textContent = `Video starts playing in ${countdown} seconds...`;
 
-      const interval = setInterval(() => {
-        seconds--;
-        countdown.textContent = `Self-destruct in ${seconds}...`;
-        if (seconds === 0) {
-          clearInterval(interval);
-          window.location.href = "birthday.html"; // Redirect to birthday page
+      if (countdown === 0) {
+        clearInterval(countdownInterval);
+        countdownText.textContent = "Video is playing..."; // Change countdown text
+        videoPlayer.style.display = "block"; // Show the video player
+        videoPlayer.play(); // Start video playback
+      }
+    }, 1000);
+
+    // When video ends, show the progress bar and animate it in 3 seconds
+    videoPlayer.onended = function() {
+      progressBarContainer.style.display = "block"; // Show progress bar container
+      let progress = 0;
+
+      const progressDuration = 3000; // 3 seconds for the progress bar
+      const intervalTime = 50; // Update every 50ms
+      const steps = progressDuration / intervalTime; // Calculate number of steps
+
+      let stepProgress = 0;
+
+      const progressInterval = setInterval(function() {
+        stepProgress++;
+        progress = (stepProgress / steps) * 100; // Calculate percentage
+        progressBar.style.width = progress + "%"; // Update the progress bar
+
+        if (progress >= 100) {
+          clearInterval(progressInterval); // Stop the progress bar animation
+          setTimeout(function() {
+            window.location.href = "happybirthday.html"; // Redirect to happybirthday.html after 1s
+          }, 1000); // 1-second delay before redirecting
         }
-      }, 1000);
-    });
+      }, intervalTime); // Increase every 50ms
+    };
 
     // Matrix effect setup
     const canvas = document.getElementById('matrixCanvas');
