@@ -94,7 +94,7 @@
   <div id="videoCountdown">Down here is a video, follow the instructions as it is, after the video ends please wait a few seconds.</div>
 
   <!-- Countdown text before video starts (this text stays and doesn't disappear) -->
-  <div id="countdownText">Video starts playing in 10 seconds do not enter full screen... </div>
+  <div id="countdownText">(Do not enter full screen) video starts playing in 10 seconds ... </div>
 
   <!-- Progress bar after video ends -->
   <div id="progress-bar-container">
@@ -124,7 +124,7 @@
 
     const countdownInterval = setInterval(function() {
       countdown--;
-      countdownText.textContent = `Video starts playing in ${countdown} seconds...`;
+      countdownText.textContent = `(Do not enter full screen) video starts playing in ${countdown} seconds...`;
 
       if (countdown === 0) {
         clearInterval(countdownInterval);
