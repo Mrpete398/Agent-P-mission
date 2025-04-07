@@ -39,8 +39,9 @@
       max-width: 700px;
       margin-left: auto;
       margin-right: auto;
-      border: 2px solid #00ff00; /* Narrower green border */
+      border: 2px solid #00ff00; /* Green border */
       padding: 5px;
+      display: none; /* Initially hidden */
     }
 
     /* Progress bar styling */
@@ -117,6 +118,7 @@
     let countdown = 10;
     const countdownText = document.getElementById("countdownText");
     const videoPlayer = document.getElementById("videoPlayer");
+    const videoContainer = document.getElementById("videoContainer");
     const progressBar = document.getElementById("progress-bar");
     const progressBarContainer = document.getElementById("progress-bar-container");
 
@@ -127,7 +129,9 @@
       if (countdown === 0) {
         clearInterval(countdownInterval);
         countdownText.textContent = "Please press play and wait to finish ..."; // Change countdown text
-        videoPlayer.style.display = "block"; // Show the video player
+
+        // Show the video container and start playing the video
+        videoContainer.style.display = "block"; // Show the video player with green border
         videoPlayer.play(); // Start video playback
       }
     }, 1000);
