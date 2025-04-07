@@ -108,8 +108,8 @@
       ctx.fillStyle = 'rgba(0, 0, 0, 0.15)'; // Dark background for matrix effect
       ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill background
 
-      ctx.fillStyle = '#00ff00'; // Green text color for matrix effect
-      ctx.font = fontSize + 'px monospace'; // Set font size
+      ctx.fillStyle = 'rgba(0, 255, 0, 0.5)'; // Green text with 50% transparency
+      ctx.font = fontSize + 'px monospace'; // Set font size and make it bolder
 
       // Loop through each column and draw characters
       for (let i = 0; i < drops.length; i++) {
