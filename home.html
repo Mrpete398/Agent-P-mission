@@ -14,7 +14,7 @@
       height: 100vh;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* Align content to the top */
+      justify-content: flex-start;
       align-items: center;
     }
 
@@ -52,7 +52,7 @@
       background-color: #333;
       border-radius: 5px;
       height: 20px;
-      display: none; /* Hidden initially */
+      display: none;
       position: relative;
     }
 
@@ -80,21 +80,21 @@
       bottom: 0;
       left: 0;
       width: 100%;
-      height: 150px; /* Matrix height at the bottom */
-      z-index: -1; /* Behind the page content */
-      pointer-events: none; /* Non-interactive */
+      height: 150px;
+      z-index: -1;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
 
   <h1>Welcome Agent P 008</h1>
-  
+
   <!-- Text: Down here is a video, remains visible throughout -->
   <div id="videoCountdown">Down here is a video, follow the instructions as it is, the site will autodestroy when you'll end the video in 3 seconds.</div>
 
   <!-- Countdown text before video starts (this text stays and doesn't disappear) -->
-  <div id="countdownText" style="font-size: 1.5em; margin-top: 20px;">Video starts playing in 10 seconds...</div>
+  <div id="countdownText">Video starts playing in 10 seconds...</div>
 
   <!-- Progress bar after video ends -->
   <div id="progress-bar-container">
@@ -102,9 +102,9 @@
     <div id="progress-bar-text">Please wait, loading...</div>
   </div>
 
-  <!-- Video container with green border -->
+  <!-- Video container -->
   <div id="videoContainer">
-    <video id="videoPlayer" width="100%" controls autoplay style="display:none;" muted>
+    <video id="videoPlayer" width="100%" controls muted>
       <source src="video.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -118,9 +118,9 @@
     let countdown = 10;
     const countdownText = document.getElementById("countdownText");
     const videoPlayer = document.getElementById("videoPlayer");
-    const videoContainer = document.getElementById("videoContainer");
     const progressBar = document.getElementById("progress-bar");
     const progressBarContainer = document.getElementById("progress-bar-container");
+    const videoContainer = document.getElementById("videoContainer");
 
     const countdownInterval = setInterval(function() {
       countdown--;
@@ -128,12 +128,10 @@
 
       if (countdown === 0) {
         clearInterval(countdownInterval);
-        countdownText.textContent = "Please press play and wait to finish ..."; // Change countdown text
-
-        // Show the video container, remove 'muted', and start playing the video
-        videoContainer.style.display = "block"; // Show the video player with green border
-        videoPlayer.muted = false; // Unmute the video
+        countdownText.textContent = "Video is playing now..."; // Change countdown text
+        videoContainer.style.display = "block"; // Show the video container
         videoPlayer.play(); // Start video playback
+        videoPlayer.muted = false; // Unmute audio after countdown
       }
     }, 1000);
 
