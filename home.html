@@ -69,14 +69,16 @@
 <body>
 
   <h1>Welcome Agent P 008</h1>
-  <div id="videoCountdown">Down here is a video, follow the instructions as it is, this site will autodestroy when you'll end the video in 3 seconds.</div>
+  
+  <!-- Text: Down here is a video, remains visible throughout -->
+  <div id="videoCountdown">Down here is a video, follow the instructions as it is, the site will autodestroy when you'll end the video in 3 seconds.</div>
 
-  <!-- Loading Text -->
-  <div id="loadingText" style="font-size: 1.5em; color: #00ff00; margin-top: 20px;"></div>
+  <!-- Countdown text before video starts (this text stays and doesn't disappear) -->
+  <div id="countdownText" style="font-size: 1.5em; margin-top: 20px;">Video starts playing in 10 seconds...</div>
 
   <!-- Video container -->
   <div id="videoContainer">
-    <video id="videoPlayer" width="100%" controls style="display:none;">
+    <video id="videoPlayer" width="100%" controls autoplay style="display:none;">
       <source src="video.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -93,11 +95,10 @@
   <script>
     // Countdown before the video starts
     let countdown = 10;
-    const countdownText = document.getElementById("videoCountdown");
+    const countdownText = document.getElementById("countdownText");
     const videoPlayer = document.getElementById("videoPlayer");
     const progressBar = document.getElementById("progress-bar");
     const progressBarContainer = document.getElementById("progress-bar-container");
-    const loadingText = document.getElementById("loadingText");
 
     const countdownInterval = setInterval(function() {
       countdown--;
@@ -106,7 +107,6 @@
       if (countdown === 0) {
         clearInterval(countdownInterval);
         countdownText.textContent = "Video is playing..."; // Change countdown text
-        loadingText.textContent = "Loading..."; // Show Loading text
         videoPlayer.style.display = "block"; // Show the video player
         videoPlayer.play(); // Start video playback
       }
@@ -116,7 +116,6 @@
     videoPlayer.onended = function() {
       progressBarContainer.style.display = "block"; // Show progress bar container
       let progress = 0;
-      loadingText.textContent = "Processing data..."; // Show Processing data text
 
       const progressInterval = setInterval(function() {
         progress += 10; // Increase progress by 10% every 0.5s
@@ -125,7 +124,7 @@
         if (progress >= 100) {
           clearInterval(progressInterval); // Stop the progress bar animation
           setTimeout(function() {
-            window.location.href = "birthday.html"; // Redirect to birthday.html after 1s
+            window.location.href = "birthday.html"; // Redirect to happybirthday.html after 1s
           }, 1000); // 1-second delay before redirecting
         }
       }, 500); // Increase every 0.5s
