@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Briefing</title>
+  <style>
+    body {
+      background-color: black;
+      color: white;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    h1 {
+      font-size: 1.4em;
+      margin-top: 10px;
+    }
+    p {
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+    video {
+      width: 100%;
+      max-width: 320px;
+      height: auto;
+      border: 2px solid lime;
+      border-radius: 10px;
+    }
+    .countdown {
+      font-size: 3em;
+      color: lime;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome Agent P</h1>
+  <p>
+    Down here is a video. Follow the instructions as it is.<br>
+    The site will self-destruct 3 seconds after the video ends.
+  </p>
+
+  <video id="agentVideo" autoplay>
+    <source src="video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div id="countdown" class="countdown"></div>
+
+  <script>
+    const video = document.getElementById('agentVideo');
+    const countdownElement = document.getElementById('countdown');
+
+    // Countdown after the video ends
+    video.addEventListener('ended', () => {
+      let countdown = 3;
+      const interval = setInterval(() => {
+        countdownElement.textContent = countdown;
+        countdown--;
+        if (countdown < 0) {
+          clearInterval(interval);
+          setTimeout(() => {
+            window.location.href = "birthday.html"; // Redirect to birthday page
+          }, 1000); // 1 second delay after countdown
+        }
+      }, 1000); // Update every 1 second
+    });
+  </script>
+</body>
+</html>
