@@ -44,7 +44,11 @@
     The site will self-destruct 3 seconds after the video ends.
   </p>
 
-  <video id="agentVideo" autoplay>
+  <!-- Countdown before the video starts -->
+  <div id="startCountdown" class="countdown"></div>
+
+  <!-- Video element -->
+  <video id="agentVideo" style="display:none;">
     <source src="video.mp4" type="video/mp4" />
     Your browser does not support the video tag.
   </video>
@@ -53,7 +57,23 @@
 
   <script>
     const video = document.getElementById('agentVideo');
+    const startCountdownElement = document.getElementById('startCountdown');
     const countdownElement = document.getElementById('countdown');
+
+    let startCountdown = 3;
+    let videoStarted = false;
+
+    // Countdown before video starts
+    const startInterval = setInterval(() => {
+      startCountdownElement.textContent = startCountdown;
+      startCountdown--;
+      if (startCountdown < 0) {
+        clearInterval(startInterval);
+        video.style.display = 'block'; // Show the video
+        video.play(); // Play the video
+        videoStarted = true;
+      }
+    }, 1000);
 
     // Countdown after the video ends
     video.addEventListener('ended', () => {
