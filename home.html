@@ -71,8 +71,8 @@
   <h1>Welcome Agent P 008</h1>
   <div id="videoCountdown">Down here is a video, follow the instructions as it is, this site will autodestroy when you'll end the video in 3 seconds.</div>
 
-  <!-- Countdown text before video starts -->
-  <div id="videoCountdown">Video starts playing in 10 seconds...</div>
+  <!-- Loading Text -->
+  <div id="loadingText" style="font-size: 1.5em; color: #00ff00; margin-top: 20px;"></div>
 
   <!-- Video container -->
   <div id="videoContainer">
@@ -97,6 +97,7 @@
     const videoPlayer = document.getElementById("videoPlayer");
     const progressBar = document.getElementById("progress-bar");
     const progressBarContainer = document.getElementById("progress-bar-container");
+    const loadingText = document.getElementById("loadingText");
 
     const countdownInterval = setInterval(function() {
       countdown--;
@@ -105,6 +106,7 @@
       if (countdown === 0) {
         clearInterval(countdownInterval);
         countdownText.textContent = "Video is playing..."; // Change countdown text
+        loadingText.textContent = "Loading..."; // Show Loading text
         videoPlayer.style.display = "block"; // Show the video player
         videoPlayer.play(); // Start video playback
       }
@@ -114,6 +116,7 @@
     videoPlayer.onended = function() {
       progressBarContainer.style.display = "block"; // Show progress bar container
       let progress = 0;
+      loadingText.textContent = "Processing data..."; // Show Processing data text
 
       const progressInterval = setInterval(function() {
         progress += 10; // Increase progress by 10% every 0.5s
