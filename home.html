@@ -24,8 +24,31 @@
     }
 
     #videoCountdown {
-      font-size: 1.5em;
+      font-size: 2em;
       margin-top: 20px;
+      opacity: 0;
+      transform: scale(0);
+      animation: countdownAnimation 10s forwards;
+    }
+
+    /* Countdown animation */
+    @keyframes countdownAnimation {
+      0% {
+        opacity: 0;
+        transform: scale(0);
+      }
+      10% {
+        opacity: 1;
+        transform: scale(1.2);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      100% {
+        opacity: 0;
+        transform: scale(0);
+      }
     }
 
     #videoContainer {
@@ -69,9 +92,6 @@
 <body>
 
   <h1>Welcome Agent P 008</h1>
-  <div id="videoCountdown">Down here is a video, follow the instructions as it is, this site will autodestroy when you'll end the video in 3 seconds.</div>
-
-  <!-- Countdown text before video starts -->
   <div id="videoCountdown">Video starts playing in 10 seconds...</div>
 
   <!-- Video container -->
