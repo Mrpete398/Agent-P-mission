@@ -91,7 +91,7 @@
   <h1>Welcome Agent P 008</h1>
 
   <!-- Text: Down here is a video, remains visible throughout -->
-  <div id="videoCountdown">Down here is a video, follow the instructions as it is, the site will autodestroy when you'll end the video in 3 seconds.</div>
+  <div id="videoCountdown">Down here is a video, follow the instructions as it is, after the video ends please wait a few seconds.</div>
 
   <!-- Countdown text before video starts (this text stays and doesn't disappear) -->
   <div id="countdownText">Video starts playing in 10 seconds...</div>
@@ -128,7 +128,7 @@
 
       if (countdown === 0) {
         clearInterval(countdownInterval);
-        countdownText.textContent = "Video is playing now..."; // Change countdown text
+        countdownText.textContent = "Please press play ..."; // Change countdown text
         videoContainer.style.display = "block"; // Show the video container
         videoPlayer.play(); // Start video playback
         videoPlayer.muted = false; // Unmute audio after countdown
