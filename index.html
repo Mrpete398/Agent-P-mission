@@ -77,7 +77,7 @@
     const countdown = document.getElementById("countdown");
     const countdownBar = document.getElementById("countdown-bar");
 
-    let seconds = 3;
+    let seconds = 3; // Set countdown to 3 seconds
     countdown.style.display = "block";
     countdown.textContent = `Redirecting in ${seconds}...`;
 
@@ -89,8 +89,8 @@
       countdown.textContent = `Redirecting in ${seconds}...`;
 
       if (seconds === 0) {
-        clearInterval(interval);
-        window.location.href = "home.html"; // Redirect to home.html
+        clearInterval(interval);  // Stop the interval once the countdown reaches 0
+        window.location.href = "home.html"; // Redirect to home.html after countdown ends
       }
     }, 1000);
 
