@@ -19,15 +19,24 @@
     }
 
     p {
-      font-size: 1em;
+      font-size: 1.5em;
     }
 
-    video {
-      margin-top: 30px;
+    /* Countdown progress bar styles */
+    #countdown-bar-container {
+      margin-top: 20px;
       width: 90%;
       max-width: 600px;
-      border: 2px solid #00ff00; /* Green border */
-      border-radius: 10px;
+      background-color: #333;
+      border-radius: 5px;
+      height: 20px;
+    }
+
+    #countdown-bar {
+      height: 100%;
+      width: 0;
+      background-color: #00ff00; /* Green progress bar */
+      border-radius: 5px;
     }
 
     #countdown {
@@ -51,40 +60,39 @@
 </head>
 <body>
 
-  <h1>Welcome Agent P</h1>
-  <p>Down here is a video. Follow the instructions as it is.</p>
-  <p>The site will autodestroy when you'll end the video in 3 seconds.</p>
+  <h1>Welcome Agent P 008</h1>
 
-  <video id="agentVideo" autoplay playsinline>
-    <source src="video.mp4" type="video/mp4">
-    Your browser does not support HTML5 video.
-  </video>
+  <!-- Countdown progress bar -->
+  <div id="countdown-bar-container">
+    <div id="countdown-bar"></div>
+  </div>
 
-  <div id="countdown">Self-destruct in 3...</div>
+  <div id="countdown">Redirecting in 3...</div>
 
   <!-- Matrix canvas -->
   <canvas id="matrixCanvas"></canvas>
 
   <script>
-    // Video autoplay and audio handling
-    const video = document.getElementById("agentVideo");
+    // Countdown logic for redirect
     const countdown = document.getElementById("countdown");
+    const countdownBar = document.getElementById("countdown-bar");
 
-    // When video ends, show countdown
-    video.addEventListener("ended", () => {
-      let seconds = 3;
-      countdown.style.display = "block";
-      countdown.textContent = `Self-destruct in ${seconds}...`;
+    let seconds = 3;
+    countdown.style.display = "block";
+    countdown.textContent = `Redirecting in ${seconds}...`;
 
-      const interval = setInterval(() => {
-        seconds--;
-        countdown.textContent = `Self-destruct in ${seconds}...`;
-        if (seconds === 0) {
-          clearInterval(interval);
-          window.location.href = "birthday.html"; // Redirect to birthday page
-        }
-      }, 1000);
-    });
+    let progress = 0;
+    const interval = setInterval(() => {
+      seconds--;
+      progress += 33.33; // Update progress bar
+      countdownBar.style.width = progress + "%"; // Set the width of the bar
+      countdown.textContent = `Redirecting in ${seconds}...`;
+
+      if (seconds === 0) {
+        clearInterval(interval);
+        window.location.href = "home.html"; // Redirect to home.html
+      }
+    }, 1000);
 
     // Matrix effect setup
     const canvas = document.getElementById('matrixCanvas');
