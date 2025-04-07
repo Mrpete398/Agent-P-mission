@@ -1,33 +1,100 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ro">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Happy Birthday!!! Un an plin de vise implinite si desigur peripetii!!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Birthdayyy!!</title>
   <style>
     body {
-      background-color: black;
-      color: white;
+      background-color: #000;
+      color: #fff;
       font-family: 'Courier New', monospace;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
-      flex-direction: column;
+      text-align: center;
+      padding: 50px 20px;
+      overflow: hidden;
     }
+
     h1 {
-      font-size: 3em;
-      color: lime;
+      font-size: 2em;
+      color: #ffcc00;
+      margin-bottom: 20px;
     }
+
     p {
-      font-size: 1.5em;
-      margin-top: 20px;
+      font-size: 1.2em;
+      color: #ff66cc;
+      margin: 10px 0;
+    }
+
+    .firework {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .particle {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffcc00;
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--x), var(--y)) scale(0.5);
+        opacity: 0;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>🎉 Happy Birthdayyy! 🎉</h1>
-  <p>You've completed the mission! 🎂</p>
+
+  <h1>Happy Birthdayyy</h1>
+  <p>Un an plin de peripeţii şi aventură!🎂</p>
+  <p>Sper în continuare să primeşti tot ceea ce-ţi doreşti!!</p>
+
+  <div class="firework" id="fireworks"></div>
+
+  <script>
+    function createParticle(x, y) {
+      const particle = document.createElement('div');
+      particle.classList.add('particle');
+      const angle = Math.random() * 2 * Math.PI;
+      const distance = Math.random() * 100 + 50;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance;
+      particle.style.left = x + 'px';
+      particle.style.top = y + 'px';
+      particle.style.setProperty('--x', dx + 'px');
+      particle.style.setProperty('--y', dy + 'px');
+      document.getElementById('fireworks').appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 1000);
+    }
+
+    function triggerFireworks() {
+      const x = Math.random() * window.innerWidth;
+      const y = Math.random() * window.innerHeight / 2;
+      for (let i = 0; i < 20; i++) {
+        createParticle(x, y);
+      }
+    }
+
+    setInterval(triggerFireworks, 700);
+  </script>
+
 </body>
 </html>
