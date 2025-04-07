@@ -104,7 +104,7 @@
 
   <!-- Video container with green border -->
   <div id="videoContainer">
-    <video id="videoPlayer" width="100%" controls autoplay style="display:none;">
+    <video id="videoPlayer" width="100%" controls autoplay style="display:none;" muted>
       <source src="video.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
@@ -130,8 +130,9 @@
         clearInterval(countdownInterval);
         countdownText.textContent = "Please press play and wait to finish ..."; // Change countdown text
 
-        // Show the video container and start playing the video
+        // Show the video container, remove 'muted', and start playing the video
         videoContainer.style.display = "block"; // Show the video player with green border
+        videoPlayer.muted = false; // Unmute the video
         videoPlayer.play(); // Start video playback
       }
     }, 1000);
